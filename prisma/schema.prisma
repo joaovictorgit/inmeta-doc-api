@@ -1,0 +1,81 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 1. Colaborador
+model Collaborator {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  cpf       String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  requirements CollaboratorDocumentRequirement[]
+  documents    Document[]
+
+  @@map("collaborators")
+}
+
+// 2. Tipo de Documento (CPF, ASO, Certidão, etc.)
+model DocumentType {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  requirements CollaboratorDocumentRequirement[]
+  documents    Document[]
+
+  @@map("document_types")
+}
+
+// 3. Vinculação de Obrigatoriedade (Colaborador x Tipo de Documento)
+model CollaboratorDocumentRequirement {
+  id               String       @id @default(uuid())
+  collaboratorId   String
+  documentTypeId   String
+  createdAt        DateTime     @default(now())
+  deletedAt        DateTime?
+
+  collaborator     Collaborator @relation(fields: [collaboratorId], references: [id])
+  documentType     DocumentType @relation(fields: [documentTypeId], references: [id])
+
+  @@unique([collaboratorId, documentTypeId])
+  @@map("collaborator_document_requirements")
+}
+
+enum DocumentStatus {
+  PENDING
+  SUBMITTED
+  APPROVED
+  REJECTED
+}
+
+// 4. Histórico de Versões e Envio de Documentos
+model Document {
+  id             String         @id @default(uuid())
+  collaboratorId String
+  documentTypeId String
+  version        Int            @default(1)
+  isLatest       Boolean        @default(true)
+  status         DocumentStatus @default(SUBMITTED)
+  fileUrl        String?        // Representação lógica do arquivo/link
+  createdAt      DateTime       @default(now())
+  deletedAt      DateTime?
+
+  collaborator   Collaborator   @relation(fields: [collaboratorId], references: [id])
+  documentType   DocumentType   @relation(fields: [documentTypeId], references: [id])
+
+  @@unique([collaboratorId, documentTypeId, version])
+  @@index([collaboratorId, documentTypeId, isLatest])
+  @@map("documents")
+}
