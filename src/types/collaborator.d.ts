@@ -5,5 +5,5 @@ export type Collaborator = {
   cpf: string;
   createdAt: Date;
   updatedAt: Date;
-  deletedAt?: Date;
+  deletedAt?: Date | null;
 }
