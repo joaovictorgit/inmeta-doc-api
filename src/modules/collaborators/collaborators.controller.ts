@@ -42,7 +42,7 @@ export class CollaboratorsController {
     if (result.isError()) {
       this.logger.error(result.error.message);
 
-      return res.status(HttpStatus.BAD_GATEWAY).json(result.error.message);
+      return res.status(HttpStatus.BAD_REQUEST).json(result.error.message);
     }
 
     this.logger.log("Retornando lista");
@@ -80,7 +80,7 @@ export class CollaboratorsController {
     if (result.isError()) {
       this.logger.error(result.error.message);
 
-      return res.status(HttpStatus.BAD_GATEWAY).json(result.error.message);
+      return res.status(HttpStatus.BAD_REQUEST).json(result.error.message);
     }
 
     this.logger.log("Dados do colaborador atualizados!");
@@ -98,7 +98,7 @@ export class CollaboratorsController {
     if (result.isError()) {
       this.logger.error(result.error.message);
 
-      return res.status(HttpStatus.BAD_GATEWAY).json(result.error.message);
+      return res.status(HttpStatus.BAD_REQUEST).json(result.error.message);
     }
 
     this.logger.log("Colaborador deletado!");
