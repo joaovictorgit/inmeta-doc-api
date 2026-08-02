@@ -7,7 +7,7 @@ import { DocumentTypeController } from "./documentType.controller";
 @Module({
   providers: [PrismaService, DocumentTypeService, DocumentTypeHelper],
   controllers: [DocumentTypeController],
-  exports: [DocumentTypeModule]
+  exports: [DocumentTypeModule, DocumentTypeService]
 })
 
 export class DocumentTypeModule {}

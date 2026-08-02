@@ -7,7 +7,7 @@ import { CollaboratorHelper } from "src/common/collaboratorHelper";
 @Module({
   providers: [PrismaService, CollaboratorsService, CollaboratorHelper],
   controllers: [CollaboratorsController],
-  exports: [CollaboratorsModule]
+  exports: [CollaboratorsModule, CollaboratorsService]
 })
 
 export class CollaboratorsModule {}
