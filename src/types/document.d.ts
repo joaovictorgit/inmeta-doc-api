@@ -1,12 +1,6 @@
+import { DocumentStatus } from "src/utils/enums/document-status.enum";
 import { Collaborator } from "./collaborator";
 import { DocumentType } from "./documentType";
-
-export enum DocumentStatus {
-  PENDING = "PENDING",
-  SUBMITTED = "SUBMITTED",
-  APPROVED = "APPROVED",
-  REJECTED = "REJECTED",
-}
 
 export type Document = {
   id: string;

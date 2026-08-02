@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CollaboratorsModule } from './modules/collaborators/collaborators.module';
 import { DocumentTypeModule } from './modules/documentType/documentType.module';
 import { CollaboratorRequirementsModule } from './modules/collaboratorRequirements/collaboratorRequirements.module';
+import { DocumentModule } from './modules/document/document.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { CollaboratorRequirementsModule } from './modules/collaboratorRequiremen
     CollaboratorsModule,
     DocumentTypeModule,
     CollaboratorRequirementsModule,
+    DocumentModule
   ],
 })
 export class AppModule {}
