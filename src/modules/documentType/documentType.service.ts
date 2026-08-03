@@ -43,8 +43,8 @@ export class DocumentTypeService {
   }
 
   async findAll(params: ParamsDocumentType): Promise<Result<PaginatedResult<DocumentType>, Error>> {
-    const currentPage = parseInt(params.page) || 1;
-    const currentLimit = parseInt(params.limit) || 10;
+    const currentPage = parseInt(params.page ?? "1");
+    const currentLimit = parseInt(params.limit ?? "10");
 
     if (
       Number.isNaN(currentPage) ||
@@ -93,7 +93,7 @@ export class DocumentTypeService {
       return new Result(null as any, new Error("Id não informado!"));
     }
 
-    const currentDocumentType = await this.prisma.documentType.findUnique({
+    const currentDocumentType = await this.prisma.documentType.findFirst({
       where: {
         id,
         deletedAt: null,
