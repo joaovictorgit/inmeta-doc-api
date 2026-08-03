@@ -17,6 +17,8 @@ describe("CollaboratorsService (integração)", () => {
   });
 
   beforeEach(async () => {
+    await prisma.collaboratorDocumentRequirement.deleteMany({});
+    await prisma.documentType.deleteMany({});
     await prisma.collaborator.deleteMany({});
   });
  
