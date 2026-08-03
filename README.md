@@ -11,11 +11,57 @@
 
 Desenvolver uma API RESTful para o gerenciamento do fluxo de documentação de colaboradores. Cada colaborador é vinculado a tipos de documentos específicos que são obrigatórios para envio, e o sistema deve acompanhar quais documentos estão pendentes, enviados e em qual versão se encontram.
 
+## Preparando ambiente
+
+<h3 style="font-size: 18px;">🧬 Clonando repositório</h3>
+
+```bash
+git clone https://github.com/joaovictorgit/inmeta-doc-api.git
+```
+
+<h3 style="font-size: 18px;">📂 Instalar dependências</h3>
+
+```bash
+cd inmeta-doc-api
+npm install
+```
+
+<h3 style="font-size: 18px">⚙ Crie um arquivo .env e .env.test na raiz da pasta</h3>
+
+```bash
+# .env
+DATABASE_URL="postgresql://postgres:PASSWORD@localhost:PORT/DB_NAME?schema=public"
+
+# .env.local
+DATABASE_URL="postgresql://postgres:PASSWORD@localhost:PORT/DB_NAME_TEST?schema=public"
+```
+
+<h3 style="font-size: 18px">💻 Criando banco de dados e migração</h3>
+<strong>OBS: Tenho o Postgres instalado na sua máquina e pelo terminal rode esse comando para criar o banco de dados para rodar localmente e o banco de dados para testes. Lembre-se que o nome vai ser adicionando no DATABASE_URL</strong>
+
+```bash
+# banco de dados em desenvolvimento
+PGPASSWORD=sua_senha_postgres createdb -h localhost -U postgres nome_db
+
+# banco de dados de testes
+PGPASSWORD=sua_senha_postgres createdb -h localhost -U postgres nome_db_test
+```
+
+<h3 style="font-size: 18px">>_ Rodando aplicação</h3>
+
+```bash
+npm run start:dev
+```
+
 ## Rodar os testes
 
 ```bash
-# testes unitários e de integração
+# testes unitários
 npm run test
+# testes de integração
+npm run test:integration
+# testes e2e
+npm run test:e2e
 ```
 
 ## Tecnologias
