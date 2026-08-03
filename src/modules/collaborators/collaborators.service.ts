@@ -51,8 +51,8 @@ export class CollaboratorsService {
   }
 
   async findAll(params: ParamsCollaborator): Promise<Result<PaginatedResult<Collaborator>, Error>> {
-    const currentPage = parseInt(params.page) || 1;
-    const currentLimit = parseInt(params.limit) || 10;
+    const currentPage = parseInt(params.page ?? "1");
+    const currentLimit = parseInt(params.limit ?? "10");
 
     if (
       Number.isNaN(currentPage) ||
